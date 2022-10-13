@@ -1,6 +1,6 @@
-package dto
+package awesomeapi
 
-type CambioDto struct {
+type ExchangeRateResponse struct {
 	Code       string `json:"code"`
 	Codein     string `json:"codein"`
 	Name       string `json:"name"`
@@ -12,4 +12,13 @@ type CambioDto struct {
 	Ask        string `json:"ask"`
 	Timestamp  string `json:"timestamp"`
 	CreateDate string `json:"create_date"`
+}
+
+type ErrAwesomeApi struct {
+	Status     string
+	StatusCode int
+}
+
+func (e ErrAwesomeApi) Error() string {
+	return e.Status
 }

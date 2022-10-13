@@ -1,17 +1,16 @@
 package entities
 
-type ExchangeRate struct {
-	Name string
-	Bid  string
-}
+import "context"
 
-func NewExchangeRate(name, bid string) *ExchangeRate {
-	return &ExchangeRate{
-		Name: name,
-		Bid:  bid,
-	}
+// ExchangeRate holds exchange rate data
+type ExchangeRate struct {
+	ID         int64
+	Name       string
+	Bid        string
+	CreateDate string
 }
 
 type ExchangeRateRepository interface {
-	Save(ExchangeRate) error
+	// Create create a new record in database
+	Create(ctx context.Context, er ExchangeRate) error
 }
