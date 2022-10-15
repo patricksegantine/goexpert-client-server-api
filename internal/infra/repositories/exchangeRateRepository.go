@@ -11,7 +11,7 @@ import (
 
 var (
 	queries = map[string]string{
-		"Create": `INSERT INTO exchange_rate(Name,Bid,CreateDate)
+		"Create": `INSERT INTO exchange_rate(name,bid,created_at)
 					VALUES (?,?,?);`,
 	}
 )
@@ -26,7 +26,7 @@ func NewExchangeRateRepository(db *sql.DB) entities.ExchangeRateRepository {
 }
 
 func (r *ExchangeRateRepository) Create(ctx context.Context, er entities.ExchangeRate) error {
-	ctx, cancel := context.WithTimeout(ctx, 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(ctx, 20*time.Millisecond)
 	defer cancel()
 
 	stmt, err := r.db.PrepareContext(ctx, queries["Create"])

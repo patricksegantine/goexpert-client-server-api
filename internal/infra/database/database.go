@@ -5,9 +5,9 @@ import "database/sql"
 const createTable string = `
 	CREATE TABLE IF NOT EXISTS exchange_rate (
 		ID 			INTEGER NOT NULL PRIMARY KEY,
-		Name       	VARCHAR,
-		Bid        	VARCHAR,
-		CreateDate 	VARCHAR
+		name       	VARCHAR,
+		bid        	VARCHAR,
+		created_at 	VARCHAR
 	);
 `
 

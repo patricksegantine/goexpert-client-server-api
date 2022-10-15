@@ -22,8 +22,15 @@ func NewAwesomeApiClient() AwesomeApiClient {
 
 // GetExchangeRate gets the exchange rate by currency pair, e.g. USD-BRL or GBP-BRL
 func (api *AwesomeApiClientImpl) GetExchangeRate(ctx context.Context, currency string) (*ExchangeRateResponse, error) {
-	c := http.Client{Timeout: 300 * time.Millisecond}
-	resp, err := c.Get(fmt.Sprintf("https://economia.awesomeapi.com.br/json/last/%v", currency))
+	ctx, cancel := context.WithTimeout(ctx, 1000*time.Millisecond)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, "GET", fmt.Sprintf("https://economia.awesomeapi.com.br/json/last/%v", currency), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
 	}

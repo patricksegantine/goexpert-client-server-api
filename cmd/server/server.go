@@ -28,7 +28,7 @@ var (
 */
 
 func main() {
-	db, err := sql.Open("sqlite3", "../../cotacao.db")
+	db, err := sql.Open("sqlite3", "./cotacao.db")
 	if err != nil {
 		log.Fatalf("Error initializing database connection: %v", err)
 	}
